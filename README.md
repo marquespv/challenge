@@ -5,7 +5,7 @@ Projeto desenvolvido em linguagem Java com SpringBoot, banco de dados H2 e inclu
 Para executar:
 
   - Clonar repositório e rodar docker para carregar.
-  - porta exposta: 80
+  - porta exposta: 8080
   
   
   
