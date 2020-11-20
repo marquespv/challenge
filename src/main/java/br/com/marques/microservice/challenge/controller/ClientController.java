@@ -26,6 +26,11 @@ public class ClientController {
     
     @Autowired
     private ClientRepository ClientRepository;
+
+    @RequestMapping(method= RequestMethod.GET)
+    public List<Client> list() {
+        return ClientRepository.findAll();
+    }
       
     @GetMapping("/{id}")
     public Client clientById(@PathVariable("Id") Long Id){
@@ -35,19 +40,19 @@ public class ClientController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Client addClient(@RequestBody Client client){
-        return ClientRepo   sitory.save(client);
+        return ClientRepository.save(client);
     }
     
     @PutMapping("/{id}")
     public ResponseEntity<Client> updateClient(@PathVariable("id") long id, @RequestBody Client client) {
-        Optional<Client> clientData = clientRepository.findById(id);
+        Optional<Client> clientData = ClientRepository.findById(id);
 
         if (clientData.isPresent()) {
             Client _client = clientData.get();
             _client.setNome(client.getNome());
             _client.setCpf(client.getCpf());
             _client.setEndereco(client.getEndereco());
-            return new ResponseEntity<>(clientRepository.save(_client), HttpStatus.OK);
+            return new ResponseEntity<>(ClientRepository.save(_client), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
